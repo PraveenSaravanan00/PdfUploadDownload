@@ -1,0 +1,18 @@
+﻿
+
+ @model PdfDocument 
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+    <input type="file" name="file" />
+    <button type="submit">Upload</button>
+</form>
+
+
+@{
+
+    <div>
+        <h4>Uploaded PDF</h4>
+        <a asp-controller="Home" asp-action="Download" asp-route-id="1">Download PDF</a>
+    </div>
+}
+

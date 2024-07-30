@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PdfUploadAndDownload.Models.PdfDocument>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="PdfDocuments" asp-action="Upload">
+    <input type="file" name="file" accept="application/pdf,application/docs," />
+    <button type="submit">Upload</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="Download" asp-route-id="@item.Id">Download PDF</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+ @* @model List<YourItemModel> *@
+@foreach (var item in Model)
+       {
+          // Display your item
+      }
+
+<div>
+    @if(ViewBag.CurrentPage > 1)
+        {
+        < a href = "/YourController/Index?page=1" > First </ a >
+        < a href = "/YourController/Index?page=@(ViewBag.CurrentPage - 1)" > Previous </ a >
+    }
+
+       @if(ViewBag.CurrentPage<ViewBag.TotalPages)
+       {
+       < a href = "/YourController/Index?page=@(ViewBag.CurrentPage + 1)" > Next </ a >
+       < a href = "/YourController/Index?page=@(ViewBag.TotalPages)" > Last </ a >
+      }
+</div>
